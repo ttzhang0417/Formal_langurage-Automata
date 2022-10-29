@@ -1,6 +1,6 @@
 # Formal_langurage-Automata
 
-### 数据存储结构
+## 数据存储结构
 
 二型文法存储在File.txt中
 
@@ -21,15 +21,23 @@ S: ['S']
 P_dict = ['S': ['Qc', 'c'], 'Q': ['Rb', 'b'], 'R': ['Sa', 'a']]
 ```
 
-### 算法整体流程
+## 算法整体流程
 
 <img src="images/image1.png" style="zoom:60%;" />
 
 <img src="images/image2.png" style="zoom:60%;" />
 
-### 各部分算法介绍
+## 程序介绍
 
-#### 去除无用符号
+file1.txt存储二型文法、remove_useless.py定义去除无用符号函数、remove_null定义去除空产生式函数、remove_singleness.py定义去除单一产生式函数、remove_left定义去除左递归函数。
+
+main.py读取file1.txt后，分别调用上述函数后，调用beginLower()和toGreibach()函数化为Greibach范式，通过write_Greibach()写入到Greibach.txt中，最后调用toNPDA()将Greibach.txt化为NPDA.txt。
+
+Recognizer.py读取NPDA.txt，判断输入的字符串是否符合文法
+
+## 各部分算法介绍
+
+### 去除无用符号
 
 1、计算“产生的”符号集N（每个T中的符号都是产生的，若A->a且a中的符号都是产生的，则A是产生的）
 
@@ -62,7 +70,7 @@ for i in Q:
 遍历所有产生式，删除含有NM的式子，更新P_dict、V、T
 ```
 
-#### 去除ε产生式
+### 去除ε产生式
 
 1、计算集合V0，V0 = ｛A属于V且A经过有限步骤能推出ε｝
 
@@ -86,7 +94,7 @@ for key, values in P_dic.items():
 更新P_dict、V
 ```
 
-#### 去除单一产生式
+### 去除单一产生式
 
 算法整体思想：遍历所有产生式，若该产生式非单一产生式，则直接加入到新的产生式字典中；若该产生式是单一产生式，如S->Q，则递归查询Q替换的右部
 
@@ -115,7 +123,7 @@ def replace(P_dict, B, V):
     return temp_list
 ```
 
-#### 去除间接左递归
+### 去除间接左递归
 
 间接左递归形如 S->Qc，Q->Rb，R->Sa
 
@@ -131,7 +139,7 @@ for i in range(len(V)):
 
 此时，所有间接左递归转化为直接左递归，如S->Qc，Q->Rb，R->Rbca
 
-#### 去除直接左递归
+### 去除直接左递归
 
 直接左递归形如 A->Aa|Ab|ab|c
 
@@ -149,19 +157,19 @@ if (该产生式左部符号与右部最左符号V相同)：
         构造新的产生式V+->iV+|ε
 ```
 
-#### 以终结符号打头
+### 以终结符号打头
 
 化为Greibach前要将所有产生式的右部化为以终结符号打头
 
 算法思想：遍历所有产生式，若存在产生式形如P->Aac以非终结符打头的产生式，则用A的右部替换P->Aac中的A，若替换后还存在非终结符打头，则继续替换，直到全部以非终结符打头为止
 
-#### 化为Greibach范式
+### 化为Greibach范式
 
 对于每一个产生式，针对右部终结符（不是打头的）a，引入新的非终结符A\*，将a换为A*，并加入构造新的产生式A\*->a。
 
 例如A->aBabc，改造为A->aBA\*B\*C\*，构造新的产生式A\*->a，B\*->b，C\*->c
 
-#### Greibach化为NPDA
+### Greibach化为NPDA
 
 非确定型下推自动机定义为一个七元组 M = (Q, Σ, Γ, δ, q0, z, F)
 
@@ -203,7 +211,7 @@ F = q2
 
 对于每一个产生式，eg. S->aAB|bAC，则构造 δ(q1, a, S) = {(q1, AB), (q1, AC)}
 
-#### NPDA接受语言
+### NPDA接受语言
 
 1、准备工作
 
