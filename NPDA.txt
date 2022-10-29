@@ -1,0 +1,23 @@
+Q = {q0, q1, q2}
+∑ = {c, b, a}
+Γ = {S, Q, R, R+, C*, A*, B*, z}
+δ={
+(q0,ε,z)={q1,Sz}
+(q1,ε,z)={q2,z}
+(q1,c,S)={q1,ε|q1,A*B*C*|q1,A*R+B*C*}
+(q1,b,S)={q1,C*|q1,C*A*B*C*|q1,C*A*R+B*C*}
+(q1,a,S)={q1,B*C*|q1,R+B*C*}
+(q1,b,Q)={q1,ε|q1,C*A*B*|q1,C*A*R+B*}
+(q1,c,Q)={q1,A*B*|q1,A*R+B*}
+(q1,a,Q)={q1,B*|q1,R+B*}
+(q1,b,R)={q1,C*A*|q1,C*A*R+}
+(q1,c,R)={q1,A*|q1,A*R+}
+(q1,a,R)={q1,ε|q1,R+}
+(q1,b,R+)={q1,C*A*|q1,C*A*R+}
+(q1,c,C*)={q1,ε}
+(q1,a,A*)={q1,ε}
+(q1,b,B*)={q1,ε}
+}
+q0 = q0
+z = z
+F = q2

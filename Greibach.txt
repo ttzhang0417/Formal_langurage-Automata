@@ -1,0 +1,7 @@
+S->c|bC*|bC*A*B*C*|cA*B*C*|cA*R+B*C*|aB*C*|aR+B*C*|bC*A*R+B*C* 
+Q->b|bC*A*B*|cA*B*|cA*R+B*|aB*|aR+B*|bC*A*R+B* 
+R->bC*A*|cA*|cA*R+|a|aR+|bC*A*R+ 
+R+->bC*A*|bC*A*R+ 
+C*->c 
+A*->a 
+B*->b 

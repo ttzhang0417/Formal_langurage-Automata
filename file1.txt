@@ -1,0 +1,4 @@
+V = {S, Q, R}
+T = {a, b, c}
+P = { S -> Qc|c, Q -> Rb|b, R -> Sa|a}
+S = { S }
